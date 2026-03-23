@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory Unlock</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #fff5f5;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🎮 Unlock Your Memories</h1>
+
+<!-- 🔒 PASSWORD SCREEN -->
+<div id="passwordSection">
+  <p>Enter your secret code 💌</p>
+  <input type="password" id="password" placeholder="Enter code">
+  <br>
+  <button onclick="checkPassword()">Unlock</button>
+  <p id="passResult"></p>
+</div>
+
+<!-- 🎯 QUESTION SECTION (hidden initially) -->
+<div id="questionSection" class="hidden">
+  <p id="question">Where did we first meet?</p>
+
+  <input type="text" id="answer" placeholder="Type your answer">
+  <br>
+  <button onclick="checkAnswer()">Submit</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+
+// 🔒 PASSWORD CHECK
+function checkPassword() {
+  let pass = document.getElementById("password").value.toLowerCase();
+
+  if (pass === "arya") {  // 👈 CHANGE THIS
+    document.getElementById("passwordSection").style.display = "none";
+    document.getElementById("questionSection").style.display = "block";
+  } else {
+    document.getElementById("passResult").innerHTML =
+      "❌ Wrong code… try again 😛";
+  }
+}
+
+// 🎯 ANSWER CHECK
+function checkAnswer() {
+  let userAnswer = document.getElementById("answer").value.toLowerCase();
+  
+  if (userAnswer.includes("college")) {
+    document.getElementById("result").innerHTML =
+      "🎉 Correct! Level Unlocked<br><br>👉 Meet Soham to collect your gift!";
+  } else {
+    document.getElementById("result").innerHTML =
+      "❌ Hmm… try again. You know this 😉";
+  }
+}
+
+</script>
+
+</body>
+</html>
