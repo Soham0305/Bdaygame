@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Level 3</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f3e8ff, #e0c3fc);
+      color: #444;
+      text-align: center;
+      margin: 0;
+      padding: 50px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #7b2cbf;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: 1px solid #c77dff;
+      width: 70%;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-top: 15px;
+      cursor: pointer;
+      background: #7b2cbf;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5a189a;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fade {
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    #finalLine {
+      margin-top: 25px;
+      font-weight: bold;
+      color: #7b2cbf;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    /* 🎊 Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: 50%;
+      left: 50%;
+      animation: explode 2.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: translate(0,0); opacity:1; }
+      100% { transform: translate(var(--x), var(--y)); opacity:0; }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 🔐 PASSWORD -->
+  <div id="passwordSection">
+    <h2>🔐 Level 3 Locked</h2>
+    <p>Enter passcode to continue</p>
+
+    <input type="password" id="password" placeholder="Enter code">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+
+    <p id="passResult"></p>
+  </div>
+
+  <!-- 💭 RIDDLE -->
+  <div id="riddleSection" class="hidden fade">
+    <p style="line-height:1.7">
+
+      He wasn’t part of the plan,<br>
+      not something you were looking for—<br>
+      just someone who slowly became a part of your everyday life.<br><br>
+
+      From random conversations<br>
+      to moments that somehow stayed longer than they should have,<br>
+      he found his place without ever forcing it.<br><br>
+
+      Not perfect, not always right,<br>
+      but always there in a way that mattered.<br><br>
+
+      Your partner, your constant,<br>
+      your person through all of this.<br><br>
+
+      You know who he is.<br><br>
+
+      <b>But not by his real name…<br>
+      by the name you know him as.</b><br><br>
+
+      <b>Who is he?</b>
+
+    </p>
+
+    <input type="text" id="answer" placeholder="Type your answer">
+    <br>
+    <button onclick="checkAnswer()">Submit</button>
+
+    <p id="result"></p>
+  </div>
+
+  <!-- 💖 FINAL -->
+  <div id="finalSection" class="hidden fade">
+    <h2>💜 Level 3 Unlocked</h2>
+
+    <p style="line-height:1.7; margin-top:20px">
+
+      Out of all the randomness,<br>
+      all the different paths and people—<br>
+      somehow, we happened.<br><br>
+
+      We had known each other for a long time,<br>
+      just existing in the same space,<br>
+      without really knowing what that would turn into.<br><br>
+
+      And then somewhere during those days at PRL,<br>
+      things quietly started changing.<br>
+      Conversations became easier,<br>
+      moments started meaning a little more,<br>
+      and without realizing it,<br>
+      I started seeing you differently.<br><br>
+
+      There was a day—25th July,<br>
+      at ISKCON…<br>
+      where I quietly asked for something<br>
+      I wasn’t even sure would happen.<br>
+      Just a simple thought,<br>
+      a small hope.<br><br>
+
+      And exactly two months later,<br>
+      on 25th September,<br>
+      somehow… it did.<br><br>
+
+      Not planned, not forced,<br>
+      just something that found its way to happen.<br><br>
+
+      <b>And honestly,<br>
+      I think that’s my favorite part of all of this.</b><br><br>
+
+      <i>And maybe… this was the final level.</i>
+
+    </p>
+
+    <div id="finalLine">
+      💜 Come meet me my love 💜
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+// PASSWORD
+function checkPassword() {
+  if (password.value.toLowerCase() === "arya2509") {
+    passwordSection.style.display = "none";
+    riddleSection.style.display = "block";
+  } else {
+    passResult.innerHTML = "❌ Not quite… try again 😉";
+  }
+}
+
+// ANSWER
+function checkAnswer() {
+  let ans = answer.value.toLowerCase().replace(/\s/g,'');
+
+  if (ans.includes("mumbai")) {
+    riddleSection.style.display = "none";
+    finalSection.style.display = "block";
+
+    setTimeout(launchConfetti, 200);
+
+    //  auto reveal final line
+    setTimeout(() => {
+      finalLine.style.opacity = 1;
+    }, 5000);
+
+  } else {
+    result.innerHTML = "Think a little closer… you already know this place 💜";
+  }
+}
+
+// CONFETTI
+function launchConfetti() {
+  const colors = ["#7b2cbf","#9d4edd","#c77dff","#e0aaff"];
+
+  for (let i = 0; i < 120; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+
+    const angle = Math.random() * 2 * Math.PI;
+    const dist = 150 + Math.random() * 300;
+
+    c.style.setProperty("--x", Math.cos(angle)*dist + "px");
+    c.style.setProperty("--y", Math.sin(angle)*dist + 150 + "px");
+
+    c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+
+    if (Math.random() > 0.5) c.style.borderRadius = "50%";
+
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2500);
+  }
+}
+
+</script>
+
+</body>
+</html>

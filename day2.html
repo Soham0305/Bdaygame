@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Level 2</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', cursive;
+      background: linear-gradient(135deg, #ffe6f0, #fef6ff);
+      color: #444;
+      text-align: center;
+      margin: 0;
+      padding: 50px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #ff4d88;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: 1px solid #ffc0cb;
+      width: 70%;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-top: 15px;
+      cursor: pointer;
+      background: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff1a66;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fade {
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    #finalLine {
+      margin-top: 25px;
+      font-weight: bold;
+      color: #ff4d88;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    /* 🎊 Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: 50%;
+      left: 50%;
+      animation: explode 2.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: translate(0,0); opacity:1; }
+      100% { transform: translate(var(--x), var(--y)); opacity:0; }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 🔐 PASSWORD -->
+  <div id="passwordSection">
+    <h2>🔐 Level 2 Locked</h2>
+    <p>Enter passcode to continue</p>
+
+    <input type="password" id="password" placeholder="Enter code">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+
+    <p id="passResult"></p>
+  </div>
+
+  <!-- 💭 RIDDLE -->
+  <div id="riddleSection" class="hidden fade">
+    <p style="line-height:1.7">
+
+      There are names the world knows you by—<br>
+      formal, casual, and everything in between.<br>
+      But there exists another one,<br>
+      one that never needed introductions.<br><br>
+
+      It doesn’t belong to classrooms,<br>
+      or conversations with new people.<br>
+      It comes from a place where you never had to explain yourself.<br><br>
+
+      A name that stayed,<br>
+      long before everything else began.<br><br>
+
+      <b>What is it?</b>
+
+    </p>
+
+    <input type="text" id="answer" placeholder="Type your answer">
+    <br>
+    <button onclick="checkAnswer()">Submit</button>
+
+    <p id="result"></p>
+  </div>
+
+  <!-- 💖 FINAL -->
+  <div id="finalSection" class="hidden fade">
+    <h2>✨ Level 2 Unlocked</h2>
+
+    <p style="line-height:1.7; margin-top:20px">
+
+      Before everything else—before groups, places, and phases—<br>
+      there’s just you.<br><br>
+
+      Different people see different versions,<br>
+      depending on where they meet you…<br>
+      but some things remain constant.<br><br>
+
+      The way you carry yourself,<br>
+      the way you react to things,<br>
+      the way you make even ordinary moments feel a little different.<br><br>
+
+      Not always obvious.<br>
+      Not always loud.<br>
+      But always there.<br><br>
+
+      <b>And somehow, that’s what makes it… you.</b>
+
+    </p>
+
+    <button onclick="showFinal()">Continue →</button>
+
+    <div id="finalLine">
+      💕 Come meet me. Level 2 unlocked.
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+// PASSWORD
+function checkPassword() {
+  if (password.value.toLowerCase() === "arya2509") {
+    passwordSection.style.display = "none";
+    riddleSection.style.display = "block";
+  } else {
+    passResult.innerHTML = "❌ Nope… try again 😉";
+  }
+}
+
+// ANSWER
+function checkAnswer() {
+  let ans = answer.value.toLowerCase();
+
+  if (ans.includes("pinu")) {
+    riddleSection.style.display = "none";
+    finalSection.style.display = "block";
+
+    setTimeout(launchConfetti, 200);
+  } else {
+    result.innerHTML = "Hmm… think closer to home 💭";
+  }
+}
+
+// FINAL LINE
+function showFinal() {
+  finalLine.style.opacity = 1;
+}
+
+// CONFETTI
+function launchConfetti() {
+  const colors = ["#ff4d88","#ffc0cb","#ffd6e8","#ff99cc"];
+
+  for (let i = 0; i < 120; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+
+    const angle = Math.random() * 2 * Math.PI;
+    const dist = 150 + Math.random() * 300;
+
+    c.style.setProperty("--x", Math.cos(angle)*dist + "px");
+    c.style.setProperty("--y", Math.sin(angle)*dist + 150 + "px");
+
+    c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+
+    if (Math.random() > 0.5) c.style.borderRadius = "50%";
+
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2500);
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Level 1</title>
+
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: #00ffcc;
+      text-align: center;
+      margin: 0;
+      padding: 50px;
+      transition: all 1s ease;
+      position: relative;
+    }
+
+    /* 🌟 SIDE GLOW */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    body::before {
+      left: 0;
+      background: radial-gradient(circle at left, rgba(0,255,200,0.15), transparent);
+    }
+
+    body::after {
+      right: 0;
+      background: radial-gradient(circle at right, rgba(0,255,200,0.15), transparent);
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 16px;
+    }
+
+    /* 🌈 Friendship mode */
+    .romantic {
+      background: linear-gradient(to top, #e6f0ff, #f5f7fa) !important;
+      color: #333 !important;
+      font-family: Arial !important;
+    }
+
+    .romantic .container {
+      background: rgba(255,255,255,0.6);
+    }
+
+    .romantic::before {
+      background: radial-gradient(circle at left, rgba(0,0,0,0.05), transparent);
+    }
+
+    .romantic::after {
+      background: radial-gradient(circle at right, rgba(0,0,0,0.05), transparent);
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 15px;
+      background: black;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      width: 70%;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      background: black;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      border-radius: 6px;
+    }
+
+    .romantic input, .romantic button {
+      background: white;
+      color: black;
+      border: 1px solid #ccc;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ✨ Smooth fade-in */
+    .fade {
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    #finalLine {
+      font-weight: bold;
+      color: #ff4d6d;
+      opacity: 0;
+      transition: opacity 1s;
+      margin-top: 20px;
+    }
+
+    /* 🎊 CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      left: 50%;
+      animation: explode 2.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: translate(0,0) rotate(0deg); opacity:1; }
+      100% { transform: translate(var(--x), var(--y)) rotate(720deg); opacity:0; }
+    }
+
+  </style>
+
+</head>
+
+<body id="body">
+
+<div class="container">
+
+  <!-- 🔒 PASSWORD -->
+  <div id="passwordSection">
+    <h2>🔐 ACCESS RESTRICTED</h2>
+    <p>Enter authorization code to proceed</p>
+
+    <input type="password" id="password">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+
+    <p id="passResult"></p>
+  </div>
+
+  <!-- 🌌 STORY -->
+  <div id="storySection" class="hidden fade">
+    <p style="line-height: 1.6; margin-top: 40px;">
+
+      There was a time when everything existed in separate circles—<br>
+      different conversations, different people, different kinds of chaos…<br>
+      paths that didn’t really intersect but just coexisted somewhere in the background.<br><br>
+
+      Then came a phase where things started shifting—<br>
+      new spaces, new people, unfamiliar beginnings…<br>
+      and somewhere in between, without a clear moment to point at,<br>
+      a new circle began to take shape.<br><br>
+
+      Not something either of us started alone,<br>
+      but something we both became a part of.<br>
+      Not entirely planned, not entirely random… just inevitable.<br><br>
+
+      <b>What is this circle called?</b>
+
+    </p>
+
+    <input type="text" id="answer">
+    <br>
+    <button onclick="checkAnswer()">Submit</button>
+
+    <p id="result"></p>
+  </div>
+
+  <!-- 💖 FINAL -->
+  <div id="finalSection" class="hidden">
+    <h2>💫 Level Unlocked</h2>
+
+    <p id="finalText" style="margin-top: 30px; line-height: 1.6; opacity:0;"></p>
+
+    <button id="nextBtn" class="hidden" onclick="showFinalLine()">Continue →</button>
+
+    <h3 id="finalLine">
+      👉 Come meet me, my queen 👸....your Birthday week has started!! ❤️🥰🤘
+    </h3>
+  </div>
+
+</div>
+
+<script>
+
+// PASSWORD
+function checkPassword() {
+  if (password.value.toLowerCase() === "arya2509") {
+    passwordSection.style.display = "none";
+    storySection.style.display = "block";
+  } else {
+    passResult.innerHTML = "❌ Access Denied";
+  }
+}
+
+// FULL TEXT
+const message = `It’s not just one group or one set of people.<br>
+
+It’s the mix of conversations, random moments,<br>
+unexpected friendships, and the people who slowly became constant.<br>
+Some you’ve known longer, some you met along the way,<br>
+but all of them shaped this phase of your life.<br>
+
+And maybe this wasn’t the path you imagined for yourself…<br>
+maybe it came with more chaos, more pressure,<br>
+and days that didn’t feel worth it.<br>
+But somewhere in between all of that,<br>
+there were still moments you genuinely enjoyed—<br>
+even if you didn’t always notice it at the time.<br><br>
+
+Some things don’t feel important when they begin…<br>
+but later, they become part of everything.<br><br>
+
+<b>This was one of those beginnings.</b>`;
+
+// ANSWER
+function checkAnswer() {
+  let ans = answer.value.toLowerCase().replace(/[^a-z]/g,'');
+
+  if (ans.includes("astrogang")) {
+
+    storySection.style.display = "none";
+    finalSection.style.display = "block";
+
+    body.classList.add("romantic");
+
+    finalText.innerHTML = message;
+
+    // ✨ smooth fade
+    setTimeout(() => {
+      finalText.style.opacity = 1;
+      nextBtn.classList.remove("hidden");
+    }, 200);
+
+    setTimeout(launchConfetti, 300);
+
+  } else {
+    result.innerHTML = "❌ Not quite… think again.";
+  }
+}
+
+// FINAL LINE
+function showFinalLine() {
+  finalLine.style.opacity = 1;
+}
+
+// CONFETTI
+function launchConfetti() {
+  const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#8338ec"];
+
+  for (let i = 0; i < 140; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+
+    const angle = Math.random() * 2 * Math.PI;
+    const dist = 200 + Math.random() * 400;
+
+    c.style.setProperty("--x", Math.cos(angle)*dist + "px");
+    c.style.setProperty("--y", Math.sin(angle)*dist + 200 + "px");
+
+    c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+
+    if (Math.random() > 0.5) c.style.borderRadius = "50%";
+
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2500);
+  }
+}
+
+</script>
+
+</body>
+</html>
